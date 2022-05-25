@@ -3,6 +3,7 @@
 
 
 <div class="bg-white w-full sm:w-8/12 rounded-md mx-auto shadow-md h-auto py-3 px-3 my-3">
+    @if( $ticket->status !== 'Resolved')
     <div class="flex justify-end ">
         <form action="{{ route('tickets.update', $ticket) }}" method="POST">
 
@@ -10,18 +11,30 @@
             @method('PUT')
             <button
                 type="submit"
-                class="border flex item-right justify-right border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                class="underline"
             >
                 Resolved
             </button>
         </form>
     </div>
+    @endif
     <div class="w-full h-16 flex items-center flex justify-between ">
         <div class="flex">
             <div>    
-                <div class="flex">
+                <div class="flex items-center">
                     <h3 class="text-md font-semibold "> {{$ticket->title}} &nbsp&nbsp </h3> 
-                <p>{{$ticket->status}}</p>
+                    @switch($ticket->status)
+                        @case("Resolved")
+                            <p class="border rounded-md px-3 py-1 ml-4 bg-green-500 text-white font-bold">{{$ticket->status}}</p>
+                            @break
+                        @case("Answerd")
+                            <p class="border rounded-md px-3 py-1 ml-4 bg-blue-500 text-white font-bold">{{$ticket->status}}</p>
+                            @break
+                        @case("new")
+                            <p class="border rounded-md px-3 py-1 ml-4 bg-yellow-500 text-white font-bold">{{$ticket->status}}</p>
+                            @break
+                    @endswitch
+                
                 </div>
                 <p class="text-xs text-gray-500">{{ $ticket->created_at->diffForHumans() }}</p>
 

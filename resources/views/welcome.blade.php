@@ -55,10 +55,11 @@
 
 {{-- comments --}}
 <div class="flex flex-col w-full">
+    
     @if ($tickets->count())
     <div class="flex flex-col justify-center items-center">
         @foreach ($tickets as $ticket)
-            
+        @can('view', $ticket)
         <div class="bg-white w-full sm:w-8/12 rounded-md shadow-md h-auto py-3 px-3 my-3">
             <div class="w-full h-16 flex items-center flex justify-between ">
                 <div class="flex">
@@ -90,8 +91,9 @@
             <p>
                 {{$ticket->body}}
             </p>
-            
         </div>
+        @endcan
+        
         @endforeach
     </div>
     @else

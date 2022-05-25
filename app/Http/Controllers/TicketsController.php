@@ -18,6 +18,9 @@ class TicketsController extends Controller
     {
         $services = Service::all();
         $tickets = Ticket::latest()->with('user', 'service')->get();
+        // if($this->authorize('view', $tickets))
+            // return view('tickets.index', compact('services', 'tickets'));
+
         return view('welcome', array(
             'services' => $services,
             'tickets' => $tickets
