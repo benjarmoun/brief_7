@@ -59,13 +59,9 @@ class TicketsController extends Controller
 
     public function update(Request $request, $id)
     {
-        
         $ticket = Ticket::find($id);
         $ticket->status = 'Resolved';
         $ticket->save();
-        
-
-
         return back();
     }
 }
